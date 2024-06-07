@@ -1,29 +1,33 @@
 package org.example.model;
 
 public class Account {
-    private int id;
+    private String id;
     private String name;
-    private int age;
+    private String age;
+    private String passWd;
 
-    public Account(int id, String name, int age) {
+    public Account(String id, String name, String age, String passWd) {
         this.id = id;
         setName(name);
-        setAge(age);
+        this.age = age;
+        this.passWd = passWd;
     }
 
+
     // Getters
-    public int getId() {
+    public String getId() {
         return id;
     }
     public String getName() {
         return name;
     }
-    public int getAge() {
+    public String getAge() {
         return age;
     }
+    public String getPassWd(){ return passWd;}
 
     // Setters
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -35,26 +39,22 @@ public class Account {
         }
     }
 
-    public void setAge(int age) {
-        if (validateAge(age)) {
+    public void setAge(String age) {
             this.age = age;
-        } else {
-            System.out.println("Invalid age. It must be greater than 17 and equal to or less than 100.");
-        }
+    }
+
+    public void setPassWd(String passWd) {
+        this.passWd = passWd;
     }
 
     // validators
-    private boolean validateAge(int age) {
-        return age >= 18 && age <= 100;
-    }
-
     private boolean validateName(String name) {
         return name != null && name.length() <= 20;
     }
 
     @Override
     public String toString() {
-        return "usuario = " + name ;
+        return "id: " + id + " " + "usuario = " + name;
     }
 }
 

@@ -10,10 +10,16 @@ public class AccountRepository {
     private final List<Account> accounts = new ArrayList<>();
 
     // Create
-    public void createAccount(int id, String name, int age) {
-        Account account = new Account(id, name, age);
+    public void createAccount(String id, String name, String age, String passWd) {
+        Account account = new Account(id, name, age, passWd);
         accounts.add(account);
         System.out.println("Account created: " + account);
+    }
+
+    public void createAccounts(List<Account> accountsFromCsv) {
+        for (Account account : accountsFromCsv) {
+            createAccount(account.getId(), account.getName(), account.getAge(), account.getPassWd());
+        }
     }
 
     // Read
@@ -21,12 +27,12 @@ public class AccountRepository {
         return accounts;
     }
 
-    public Optional<Account> getAccountById(int id) {
-        return accounts.stream().filter(acc -> acc.getId() == id).findFirst();
+    public Optional<Account> getAccountById(String id) {
+        return accounts.stream().filter(acc -> acc.getId().equals(id)).findFirst();
     }
 
     // Update
-    public boolean updateAccount(int id, String name, int age) {
+    public boolean updateAccount(String id, String name, String age) {
         Optional<Account> optionalAccount = getAccountById(id);
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
@@ -41,7 +47,7 @@ public class AccountRepository {
     }
 
     // Delete
-    public boolean deleteAccount(int id) {
+    public boolean deleteAccount(String id) {
         Optional<Account> optionalAccount = getAccountById(id);
 
         if (optionalAccount.isPresent()) {

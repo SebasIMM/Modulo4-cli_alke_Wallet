@@ -3,16 +3,16 @@ package org.example.model;
 import java.util.Date;
 
 public class Transaction {
-    private int id;
-    private Date date;
-    private String currency;
-    private double amount;
-    private String type;
-    private String description;
-    private int idAccount;
+    private final String id;
+    private final Date date;
+    private final String currency;
+    private final double amount;
+    private final String type;
+    private final String description;
+    private final String idAccount;
 
     // Constructor
-    public Transaction(int id, Date date, String currency, double amount, String type, String description, int idAccount) {
+    public Transaction(String id, Date date, String currency, double amount, String type, String description, String idAccount) {
         this.id = id;
         this.date = date;
         this.currency = currency;
@@ -23,7 +23,7 @@ public class Transaction {
     }
 
     // Getters
-    public int getId() {
+    public String getId() {
         return id;
     }
     public Date getDate() {
@@ -41,7 +41,7 @@ public class Transaction {
     public String getDescription() {
         return description;
     }
-    public int getAccountId() {
+    public String getAccountId() {
         return idAccount;
     }
 

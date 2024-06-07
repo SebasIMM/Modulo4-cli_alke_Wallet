@@ -14,7 +14,7 @@ import java.util.Date;
 public class CsvUtil {
     private static final String SEPARATOR = ",";
     private static final String csvAccount = "src/main/resources/accounts.csv";
-    private static final String csvcurrencie = "src/main/resources/currencies.csv";
+    private static final String csvCurrency = "src/main/resources/currencies.csv";
     private static final String csvTransaction = "src/main/resources/transactions.csv";
 
     // Accounts
@@ -22,7 +22,7 @@ public class CsvUtil {
     public static void writeAccountsToCsv(List<Account> accounts) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvAccount, true))) {
             for (Account account : accounts) {
-                writer.write(account.getId() + SEPARATOR + account.getName() + SEPARATOR + account.getAge());
+                writer.write(account.getId() + SEPARATOR + account.getName() + SEPARATOR + account.getAge() + SEPARATOR + account.getPassWd());
                 writer.newLine();
             }
         } catch (Exception e) {
@@ -36,10 +36,11 @@ public class CsvUtil {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(SEPARATOR);
-                int id = Integer.parseInt(data[0]);
+                String id = data[0];
                 String name = data[1];
-                int age = Integer.parseInt(data[2]);
-                accounts.add(new Account(id, name, age));
+                String age = data[2];
+                String passWd = data[3];
+                accounts.add(new Account(id, name, age, passWd));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -50,7 +51,7 @@ public class CsvUtil {
     // Currency
 
     public static void writeCurrenciesToCsv(List<Currency> currencies) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvcurrencie, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvCurrency, true))) {
             for (Currency currency : currencies) {
                 writer.write(currency.getCode() + SEPARATOR + currency.getName() + SEPARATOR + currency.getRate());
                 writer.newLine();
@@ -62,7 +63,7 @@ public class CsvUtil {
 
     public static @NotNull List<Currency> readCurrenciesFromCsv() {
         List<Currency> currencies = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvcurrencie))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvCurrency))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(SEPARATOR);
