@@ -20,7 +20,7 @@ public class TransactionRepository {
     }
 
     public Optional<Transaction> getTransactionsByIdAccount(int id){
-        return transactions.stream().filter(tra -> tra.getId() == id).findFirst();
+        return transactions.stream().filter(tra -> tra.getId() ==id).findFirst();
     }
 
     // Delete

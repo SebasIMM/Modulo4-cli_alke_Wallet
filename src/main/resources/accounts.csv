@@ -1,4 +1,4 @@
-id,name,age,passwd
-1,Sebas,24,1234
-2,Marcelo,32,1234
-3,Tamara,29,1234
+id,name,age,passwd,balance
+1,sebas,24,1234,100
+2,marcelo,32,1234,200
+3,tamara,29,1234,300

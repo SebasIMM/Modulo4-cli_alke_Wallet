@@ -1,36 +1,39 @@
 package org.example.model;
 
 public class Account {
-    private String id;
+    private int id;
     private String name;
-    private String age;
+    private int age;
     private String passWd;
+    private double balance;
 
-    public Account(String id, String name, String age, String passWd) {
+    public Account(int id, String name, int age, String passWd, double balance) {
         this.id = id;
         setName(name);
         this.age = age;
         this.passWd = passWd;
+        this.balance = balance;
     }
 
-
     // Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getName() {
         return name;
     }
-    public String getAge() {
+    public int getAge() {
         return age;
     }
     public String getPassWd(){ return passWd;}
-
-    // Setters
-    public void setId(String id) {
-        this.id = id;
+    public double getBalance() {
+        return balance;
     }
 
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setName(String name) {
         if (validateName(name)) {
             this.name = name;
@@ -38,13 +41,14 @@ public class Account {
             System.out.println("Invalid name. It must have a maximum of 20 characters.");
         }
     }
-
-    public void setAge(String age) {
+    public void setAge(int age) {
             this.age = age;
     }
-
     public void setPassWd(String passWd) {
         this.passWd = passWd;
+    }
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     // validators
@@ -54,7 +58,13 @@ public class Account {
 
     @Override
     public String toString() {
-        return "id: " + id + " " + "usuario = " + name;
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", passWd='" + passWd + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }
 

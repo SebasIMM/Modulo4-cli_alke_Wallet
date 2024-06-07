@@ -1,24 +1,22 @@
 package org.example.repository;
 
 import org.example.model.Account;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AccountRepository {
-    private final List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts = new ArrayList<>();
 
     // Create
-    public void createAccount(String id, String name, String age, String passWd) {
-        Account account = new Account(id, name, age, passWd);
+    public void createAccount(Account account) {
         accounts.add(account);
         System.out.println("Account created: " + account);
     }
 
-    public void createAccounts(List<Account> accountsFromCsv) {
-        for (Account account : accountsFromCsv) {
-            createAccount(account.getId(), account.getName(), account.getAge(), account.getPassWd());
+    public void createAccounts(List<Account> accounts) {
+        for (Account account : accounts) {
+            createAccount(account);
         }
     }
 
@@ -27,37 +25,38 @@ public class AccountRepository {
         return accounts;
     }
 
-    public Optional<Account> getAccountById(String id) {
-        return accounts.stream().filter(acc -> acc.getId().equals(id)).findFirst();
+    public Optional<Account> getAccountById(int accountId) {
+        return accounts.stream().filter(acc -> acc.getId() == accountId).findFirst();
     }
 
     // Update
-    public boolean updateAccount(String id, String name, String age) {
-        Optional<Account> optionalAccount = getAccountById(id);
+    public boolean updateAccount(Account updatedAccount) {
+        Optional<Account> optionalAccount = getAccountById(updatedAccount.getId());
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
-            account.setName(name);
-            account.setAge(age);
+            account.setName(updatedAccount.getName());
+            account.setAge(updatedAccount.getAge());
+            account.setPassWd(updatedAccount.getPassWd());
+            account.setBalance(updatedAccount.getBalance());
             System.out.println("Account updated: " + account);
             return true;
         } else {
-            System.out.println("Account with id " + id + " not found.");
+            System.out.println("Account with id " + updatedAccount.getId() + " not found.");
             return false;
         }
     }
 
     // Delete
-    public boolean deleteAccount(String id) {
-        Optional<Account> optionalAccount = getAccountById(id);
+    public boolean deleteAccount(int accountId) {
+        Optional<Account> optionalAccount = getAccountById(accountId);
 
         if (optionalAccount.isPresent()) {
             accounts.remove(optionalAccount.get());
             System.out.println("Account deleted: " + optionalAccount.get());
             return true;
         } else {
-            System.out.println("Account with id " + id + " not found.");
+            System.out.println("Account not found.");
             return false;
         }
     }
-
 }

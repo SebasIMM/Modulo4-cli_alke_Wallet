@@ -1,10 +1,24 @@
 package org.example.cli;
 
+import org.example.model.Account;
+import org.example.repository.AccountRepository;
+import org.example.util.CsvUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleController {
     private boolean sessionStarted = false;
-    private Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
+
+    private List<Account> accountsFromCsv;
+    private AccountRepository accountRepository;
+
+    public ConsoleController(List<Account> accountsFromCsv, AccountRepository accountRepository) {
+        this.accountsFromCsv = accountsFromCsv;
+        this.accountRepository = accountRepository;
+    }
 
     public void showMainMenu() {
         do {
@@ -19,19 +33,31 @@ public class ConsoleController {
     private void login() {
         System.out.println("----- Iniciar Sesión -----");
         System.out.print("Usuario: ");
-        String usuario = scan.nextLine();
+        String user = scan.nextLine();
         System.out.print("Clave: ");
-        String clave = scan.nextLine();
+        String pass = scan.nextLine();
 
-        // Aquí puedes agregar la lógica para validar el usuario y la clave
-        sessionStarted = true;
-        System.out.println("Sesión iniciada correctamente.\n");
+        // Validate
+        @NotNull List<Account> accountsFromCsv = CsvUtil.readAccountsFromCsv();
+
+        for (Account account : accountsFromCsv) {
+            if (account.getName().equals(user)) {
+                if (account.getPassWd().equals(pass)) {
+                    sessionStarted = true;
+                    System.out.println("Sesión iniciada correctamente.\n");
+                } else {
+                    System.out.println("Contraseña incorrecta. Por favor, inicie sesión nuevamente.\n");
+                }
+                break;
+            }
+        }
     }
 
     private void showOptions() {
         System.out.println("----- Menú Principal -----");
-        System.out.println("1. Realizar Transferencias");
-        System.out.println("2. Ver Monedas");
+        System.out.println("1. Ver mis datos");
+        System.out.println("2. Realizar Transferencias");
+        System.out.println("3. Ver Monedas");
         System.out.println("4. Ver Historial Transferencia");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
@@ -40,14 +66,18 @@ public class ConsoleController {
 
         switch (opcion) {
             case 1:
+                UserData user = new UserData();
+                user.run();
+                break;
+            case 2:
                 Transference transference = new Transference();
                 transference.run();
                 break;
-            case 2:
+            case 3:
                 //CrearCuentas crearCuentas = new CrearCuentas();
                 //crearCuentas.mostrarMenuCrearCuentas();
                 break;
-            case 3:
+            case 4:
                 //CrearCuentas crearCuentas = new CrearCuentas();
                 //crearCuentas.mostrarMenuCrearCuentas();
                 break;
