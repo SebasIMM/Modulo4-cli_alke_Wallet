@@ -6,6 +6,7 @@ import org.example.model.Transaction;
 import org.example.repository.AccountRepository;
 import org.example.repository.CurrencyRepository;
 import org.example.repository.TransactionRepository;
+import org.example.service.TransferService;
 import org.example.util.CsvUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -89,8 +90,9 @@ public class ConsoleController {
                 user.run(userId,accountRepository);
                 break;
             case 2:
-                //Transference transference = new Transference();
-                //transference.run();
+                TransferService transferService = new TransferService();
+                Transference transference = new Transference(transferService);
+                transference.run(currencyRepository);
                 break;
             case 3:
                 History history = new History();
