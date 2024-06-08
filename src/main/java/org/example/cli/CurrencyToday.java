@@ -12,12 +12,11 @@ public class CurrencyToday {
         try {
             if (currencies != null && !currencies.isEmpty()) {
                 System.out.println("------------------ Monedas al día ------------------");
-                System.out.println();
                 for (Currency currency : currencies) {
                     String formattedString = String.format("Moneda: %-4s | %-25s | %-10.4f",
                             currency.getCode(), currency.getName(), currency.getRate());
                     System.out.println(formattedString);
-                    System.out.println("---------------------------------------------------");
+                    System.out.println("----------------------------------------------------");
                 }
             } else {
                 System.out.println("Error al mostrar las monedas de hoy");

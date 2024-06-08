@@ -9,9 +9,9 @@ public class UserData {
 
         try {
             if (userAccount != null) {
-                System.out.println("----- Información de Usuario -----");
-                System.out.printf("Nombre: %s%n", userAccount.getName());
-                System.out.printf("Balance: %.2f%n", userAccount.getBalance());
+                System.out.println("----- Información de Usuario -----\n");
+                System.out.printf(" Nombre: %s%n", userAccount.getName());
+                System.out.printf(" Balance: %.2f%n\n", userAccount.getBalance());
                 System.out.println("----------------------------------");
             } else {
                 System.out.printf("No se encontró información para el usuario con ID: %s%n", userId);

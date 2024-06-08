@@ -102,7 +102,7 @@ public class CsvUtil {
             for (Transaction transaction : transactions) {
                 writer.write(transaction.getId() + SEPARATOR + transaction.getDate() + SEPARATOR + transaction.getCurrency() +
                         SEPARATOR + transaction.getAmount() + SEPARATOR + transaction.getType() + SEPARATOR +
-                        transaction.getDescription() + SEPARATOR + transaction.getAccountId());
+                        transaction.getDescription() + SEPARATOR + transaction.getIdAccount());
                 writer.newLine();
             }
         } catch (Exception e) {
@@ -110,34 +110,7 @@ public class CsvUtil {
         }
     }
 
-    /*public static @NotNull List<Transaction> readTransactionsFromCsv() {
-        List<Transaction> transactions = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvTransaction))) {
-            String header = reader.readLine();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(SEPARATOR);
-                int id = Integer.parseInt(data[0]);
-                Date date = dateFormat.parse(data[1]); // Convirtiendo la cadena en un objeto Date
-                String currency = data[2];
-                double amount = Double.parseDouble(data[3]);
-                String type = data[4];
-                String description = data[5];
-                int idAccount = Integer.parseInt(data[6]);
-
-                Transaction transaction = new Transaction(id, date, currency, amount, type, description, idAccount);
-                transactions.add(transaction);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return transactions;
-    }*/
-    public static @NotNull List<Transaction> readTransactionsFromCsv() {
+   public static @NotNull List<Transaction> readTransactionsFromCsv() {
         List<Transaction> transactions = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 

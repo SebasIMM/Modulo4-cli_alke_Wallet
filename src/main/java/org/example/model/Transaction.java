@@ -41,7 +41,7 @@ public class Transaction {
     public String getDescription() {
         return description;
     }
-    public int getAccountId() {
+    public int getIdAccount() {
         return idAccount;
     }
 

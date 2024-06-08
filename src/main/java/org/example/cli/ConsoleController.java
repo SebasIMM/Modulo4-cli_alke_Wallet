@@ -38,6 +38,7 @@ public class ConsoleController {
         do {
             if (!sessionStarted) {
                 //login();
+                userId = 1;
                 sessionStarted = true;
             } else {
                 System.out.println("Presiona Enter para continuar...");
@@ -75,8 +76,8 @@ public class ConsoleController {
         System.out.println("----- Menú Principal -----");
         System.out.println("1. Ver Balance");
         System.out.println("2. Realizar Transferencias");
-        System.out.println("3. Ver Monedas");
-        System.out.println("4. Ver Historial Transferencia");
+        System.out.println("3. Ver Historial Transferencia");
+        System.out.println("4. Ver Monedas");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
         int opcion = scan.nextInt();
@@ -92,12 +93,12 @@ public class ConsoleController {
                 //transference.run();
                 break;
             case 3:
-                CurrencyToday currency = new CurrencyToday();
-                currency.run(currencyRepository);
+                History history = new History();
+                history.run(userId, transactionRepository);
                 break;
             case 4:
-                //CrearCuentas crearCuentas = new CrearCuentas();
-                //crearCuentas.mostrarMenuCrearCuentas();
+                CurrencyToday currency = new CurrencyToday();
+                currency.run(currencyRepository);
                 break;
             case 0:
                 System.out.println("Saliendo del programa...");

@@ -1,22 +1,29 @@
 package org.example.cli;
 
-import java.util.Scanner;
+import org.example.model.Transaction;
+import org.example.repository.TransactionRepository;
 
-import java.util.Scanner;
+import java.util.List;
 
 public class History {
-    private Scanner scanner = new Scanner(System.in);
+    public void run(int userId, TransactionRepository transactionRepository) {
+        List<Transaction> transactions = transactionRepository.getTransactionsByIdAccount(userId);
 
-    public void run() {
-        System.out.println("----- Transferencias -----");
-        System.out.println("Aquí puedes realizar transferencias.");
-
-        System.out.print("Ingrese el monto a transferir: ");
-        double monto = scanner.nextDouble();
-        scanner.nextLine(); // Consumir el salto de línea
-        System.out.println("Transferencia de " + monto + " realizada con éxito.");
+        try {
+            if (transactions != null && !transactions.isEmpty()) {
+                System.out.println("---------- Historial de transferencias ----------");
+                System.out.println();
+                for (Transaction transaction : transactions) {
+                    String formattedString = String.format("Fecha: %-20s | Moneda: %-5s | Monto: %10.2f",
+                            transaction.getDate(), transaction.getCurrency(), transaction.getAmount());
+                    System.out.println(formattedString);
+                }
+                System.out.println();
+            } else {
+                System.out.println("No se encontraron transacciones para el usuario con ID: " + userId);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
-
-
-

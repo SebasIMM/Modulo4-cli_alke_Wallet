@@ -5,6 +5,7 @@ import org.example.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TransactionRepository {
     private final List<Transaction> transactions = new ArrayList<>();
@@ -24,10 +25,9 @@ public class TransactionRepository {
         return transactions;
     }
 
-    public Optional<Transaction> getTransactionsByIdAccount(int idAccount) {
+    public List<Transaction> getTransactionsByIdAccount(int idAccount) {
         return transactions.stream()
-                .filter(tra -> tra.getId() == idAccount)
-                .findFirst();
+                .filter(tra -> tra.getIdAccount() == idAccount)
+                .collect(Collectors.toList());
     }
-
 }
