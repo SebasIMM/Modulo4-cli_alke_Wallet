@@ -3,13 +3,13 @@ package org.example.model;
 import java.util.Date;
 
 public class Transaction {
-    private final int id;
-    private final Date date;
-    private final String currency;
-    private final double amount;
-    private final String type;
-    private final String description;
-    private final int idAccount;
+    private int id;
+    private Date date;
+    private String currency;
+    private double amount;
+    private String type;
+    private String description;
+    private int idAccount;
 
     // Constructor
     public Transaction(int id, Date date, String currency, double amount, String type, String description, int idAccount) {

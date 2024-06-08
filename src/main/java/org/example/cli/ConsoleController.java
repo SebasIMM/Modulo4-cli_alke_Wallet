@@ -1,7 +1,11 @@
 package org.example.cli;
 
 import org.example.model.Account;
+import org.example.model.Currency;
+import org.example.model.Transaction;
 import org.example.repository.AccountRepository;
+import org.example.repository.CurrencyRepository;
+import org.example.repository.TransactionRepository;
 import org.example.util.CsvUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,10 +18,20 @@ public class ConsoleController {
 
     private List<Account> accountsFromCsv;
     private AccountRepository accountRepository;
+    private List<Currency> currenciesFromCsv;
+    private CurrencyRepository currencyRepository;
+    private List<Transaction> transactionsFromCsv;
+    private TransactionRepository transactionRepository;
 
-    public ConsoleController(List<Account> accountsFromCsv, AccountRepository accountRepository) {
+    public ConsoleController(List<Account> accountsFromCsv, AccountRepository accountRepository,
+                             List<Currency> currenciesFromCsv, CurrencyRepository currencyRepository,
+                             List<Transaction> transactionsFromCsv, TransactionRepository transactionRepository) {
         this.accountsFromCsv = accountsFromCsv;
         this.accountRepository = accountRepository;
+        this.currenciesFromCsv = currenciesFromCsv;
+        this.currencyRepository = currencyRepository;
+        this.transactionsFromCsv = transactionsFromCsv;
+        this.transactionRepository = transactionRepository;
     }
 
     public void showMainMenu() {
@@ -25,25 +39,28 @@ public class ConsoleController {
             if (!sessionStarted) {
                 login();
             } else {
+                System.out.println("Presiona Enter para continuar...");
+                scan.nextLine();
                 showOptions();
             }
         } while (true);
     }
 
+    int userId;
     private void login() {
         System.out.println("----- Iniciar Sesión -----");
-        System.out.print("Usuario: ");
+        System.out.print("Usuario (sebas): ");
         String user = scan.nextLine();
-        System.out.print("Clave: ");
+        System.out.print("Clave (1234): ");
         String pass = scan.nextLine();
 
         // Validate
         @NotNull List<Account> accountsFromCsv = CsvUtil.readAccountsFromCsv();
-
         for (Account account : accountsFromCsv) {
             if (account.getName().equals(user)) {
                 if (account.getPassWd().equals(pass)) {
                     sessionStarted = true;
+                    userId = account.getId();
                     System.out.println("Sesión iniciada correctamente.\n");
                 } else {
                     System.out.println("Contraseña incorrecta. Por favor, inicie sesión nuevamente.\n");
@@ -67,7 +84,7 @@ public class ConsoleController {
         switch (opcion) {
             case 1:
                 UserData user = new UserData();
-                user.run();
+                user.run(userId,accountRepository);
                 break;
             case 2:
                 Transference transference = new Transference();

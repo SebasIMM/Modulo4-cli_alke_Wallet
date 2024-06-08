@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.model.Account;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,13 +12,10 @@ public class AccountRepository {
     // Create
     public void createAccount(Account account) {
         accounts.add(account);
-        System.out.println("Account created: " + account);
     }
 
     public void createAccounts(List<Account> accounts) {
-        for (Account account : accounts) {
-            createAccount(account);
-        }
+        this.accounts.addAll(accounts);
     }
 
     // Read
@@ -25,37 +23,38 @@ public class AccountRepository {
         return accounts;
     }
 
-    public Optional<Account> getAccountById(int accountId) {
-        return accounts.stream().filter(acc -> acc.getId() == accountId).findFirst();
+    public Account getAccountById(int accountId) {
+        return accounts.stream()
+                .filter(acc -> acc.getId() == accountId)
+                .findFirst()
+                .orElse(null);
     }
 
     // Update
     public boolean updateAccount(Account updatedAccount) {
-        Optional<Account> optionalAccount = getAccountById(updatedAccount.getId());
-        if (optionalAccount.isPresent()) {
-            Account account = optionalAccount.get();
+        Account account = getAccountById(updatedAccount.getId());
+        if (account != null) {
             account.setName(updatedAccount.getName());
             account.setAge(updatedAccount.getAge());
             account.setPassWd(updatedAccount.getPassWd());
             account.setBalance(updatedAccount.getBalance());
-            System.out.println("Account updated: " + account);
             return true;
         } else {
-            System.out.println("Account with id " + updatedAccount.getId() + " not found.");
+            System.out.println("Cuenta con el id " + updatedAccount.getId() + " no encontrada");
             return false;
         }
     }
 
     // Delete
     public boolean deleteAccount(int accountId) {
-        Optional<Account> optionalAccount = getAccountById(accountId);
+        Account account = getAccountById(accountId);
 
-        if (optionalAccount.isPresent()) {
-            accounts.remove(optionalAccount.get());
-            System.out.println("Account deleted: " + optionalAccount.get());
+        if (account != null) {
+            accounts.remove(account);
+            System.out.println("Cuenta eliminada: " + account);
             return true;
         } else {
-            System.out.println("Account not found.");
+            System.out.println("Cuenta no encontrada");
             return false;
         }
     }

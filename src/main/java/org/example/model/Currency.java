@@ -5,6 +5,7 @@ public class Currency {
     private String name;
     private double rate;
 
+    // Constructor
     public Currency(String code, String name, double rate) {
         this.code = code;
         this.name = name;
@@ -31,5 +32,14 @@ public class Currency {
     }
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", rate=" + rate +
+                '}';
     }
 }
