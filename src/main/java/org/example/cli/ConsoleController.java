@@ -38,9 +38,7 @@ public class ConsoleController {
     public void showMainMenu() {
         do {
             if (!sessionStarted) {
-                //login();
-                userId = 1;
-                sessionStarted = true;
+                login();
             } else {
                 System.out.println("Presiona Enter para continuar...");
                 scan.nextLine();
