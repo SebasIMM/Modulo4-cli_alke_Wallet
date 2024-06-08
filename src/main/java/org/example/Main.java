@@ -29,7 +29,7 @@ public class Main {
         TransactionRepository transactionRep = new TransactionRepository();
         transactionRep.createTransactions(transactionsFromCsv);
 
-
+        // Start cli
         ConsoleController menu = new ConsoleController(accountsFromCsv, accountRep,
                                                         currenciesFromCsv, currencyrep,
                                                         transactionsFromCsv, transactionRep);

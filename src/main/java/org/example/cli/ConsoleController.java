@@ -37,7 +37,8 @@ public class ConsoleController {
     public void showMainMenu() {
         do {
             if (!sessionStarted) {
-                login();
+                //login();
+                sessionStarted = true;
             } else {
                 System.out.println("Presiona Enter para continuar...");
                 scan.nextLine();
@@ -72,7 +73,7 @@ public class ConsoleController {
 
     private void showOptions() {
         System.out.println("----- Menú Principal -----");
-        System.out.println("1. Ver mis datos");
+        System.out.println("1. Ver Balance");
         System.out.println("2. Realizar Transferencias");
         System.out.println("3. Ver Monedas");
         System.out.println("4. Ver Historial Transferencia");
@@ -87,12 +88,12 @@ public class ConsoleController {
                 user.run(userId,accountRepository);
                 break;
             case 2:
-                Transference transference = new Transference();
-                transference.run();
+                //Transference transference = new Transference();
+                //transference.run();
                 break;
             case 3:
-                //CrearCuentas crearCuentas = new CrearCuentas();
-                //crearCuentas.mostrarMenuCrearCuentas();
+                CurrencyToday currency = new CurrencyToday();
+                currency.run(currencyRepository);
                 break;
             case 4:
                 //CrearCuentas crearCuentas = new CrearCuentas();
