@@ -1,13 +1,13 @@
 package org.example.cli;
 
 import org.example.model.Currency;
-import org.example.repository.CurrencyRepository;
+import org.example.repository.impl.CurrencyRepositoryImpl;
 
 import java.util.List;
 
 public class CurrencyToday {
-    public void run(CurrencyRepository currencyRepository) {
-        List<Currency> currencies = currencyRepository.getAllCurrencies();
+    public void run(CurrencyRepositoryImpl currencyRepositoryImpl) {
+        List<Currency> currencies = currencyRepositoryImpl.getAllCurrencies();
 
         try {
             if (currencies != null && !currencies.isEmpty()) {

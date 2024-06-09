@@ -1,13 +1,13 @@
 package org.example.cli;
 
 import org.example.model.Transaction;
-import org.example.repository.TransactionRepository;
+import org.example.repository.impl.TransactionRepositoryImpl;
 
 import java.util.List;
 
 public class History {
-    public void run(int userId, TransactionRepository transactionRepository) {
-        List<Transaction> transactions = transactionRepository.getTransactionsByIdAccount(userId);
+    public void run(int userId, TransactionRepositoryImpl transactionRepositoryImpl) {
+        List<Transaction> transactions = transactionRepositoryImpl.getTransactionsByIdAccount(userId);
 
         try {
             if (transactions != null && !transactions.isEmpty()) {

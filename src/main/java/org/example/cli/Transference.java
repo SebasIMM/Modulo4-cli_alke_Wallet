@@ -1,7 +1,7 @@
 package org.example.cli;
 
 import org.example.model.Currency;
-import org.example.repository.CurrencyRepository;
+import org.example.repository.impl.CurrencyRepositoryImpl;
 import org.example.service.TransferService;
 
 import java.util.List;
@@ -15,8 +15,8 @@ public class Transference {
         this.transferService = transferService;
     }
 
-    public void run(CurrencyRepository currencyRepository) {
-        List<Currency> currencies = currencyRepository.getAllCurrencies();
+    public void run(CurrencyRepositoryImpl currencyRepositoryImpl) {
+        List<Currency> currencies = currencyRepositoryImpl.getAllCurrencies();
 
         System.out.println("Seleccione la moneda de origen:");
         displayCurrencies(currencies);

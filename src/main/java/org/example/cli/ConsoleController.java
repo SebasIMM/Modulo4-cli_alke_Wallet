@@ -3,9 +3,9 @@ package org.example.cli;
 import org.example.model.Account;
 import org.example.model.Currency;
 import org.example.model.Transaction;
-import org.example.repository.AccountRepository;
-import org.example.repository.CurrencyRepository;
-import org.example.repository.TransactionRepository;
+import org.example.repository.impl.AccountRepositoryImpl;
+import org.example.repository.impl.CurrencyRepositoryImpl;
+import org.example.repository.impl.TransactionRepositoryImpl;
 import org.example.service.TransferService;
 import org.example.util.CsvUtil;
 import org.jetbrains.annotations.NotNull;
@@ -18,21 +18,21 @@ public class ConsoleController {
     private final Scanner scan = new Scanner(System.in);
 
     private List<Account> accountsFromCsv;
-    private AccountRepository accountRepository;
+    private AccountRepositoryImpl accountRepositoryImpl;
     private List<Currency> currenciesFromCsv;
-    private CurrencyRepository currencyRepository;
+    private CurrencyRepositoryImpl currencyRepositoryImpl;
     private List<Transaction> transactionsFromCsv;
-    private TransactionRepository transactionRepository;
+    private TransactionRepositoryImpl transactionRepositoryImpl;
 
-    public ConsoleController(List<Account> accountsFromCsv, AccountRepository accountRepository,
-                             List<Currency> currenciesFromCsv, CurrencyRepository currencyRepository,
-                             List<Transaction> transactionsFromCsv, TransactionRepository transactionRepository) {
+    public ConsoleController(List<Account> accountsFromCsv, AccountRepositoryImpl accountRepositoryImpl,
+                             List<Currency> currenciesFromCsv, CurrencyRepositoryImpl currencyRepositoryImpl,
+                             List<Transaction> transactionsFromCsv, TransactionRepositoryImpl transactionRepositoryImpl) {
         this.accountsFromCsv = accountsFromCsv;
-        this.accountRepository = accountRepository;
+        this.accountRepositoryImpl = accountRepositoryImpl;
         this.currenciesFromCsv = currenciesFromCsv;
-        this.currencyRepository = currencyRepository;
+        this.currencyRepositoryImpl = currencyRepositoryImpl;
         this.transactionsFromCsv = transactionsFromCsv;
-        this.transactionRepository = transactionRepository;
+        this.transactionRepositoryImpl = transactionRepositoryImpl;
     }
 
     public void showMainMenu() {
@@ -85,20 +85,20 @@ public class ConsoleController {
         switch (opcion) {
             case 1:
                 UserData user = new UserData();
-                user.run(userId,accountRepository);
+                user.run(userId, accountRepositoryImpl);
                 break;
             case 2:
                 TransferService transferService = new TransferService();
                 Transference transference = new Transference(transferService);
-                transference.run(currencyRepository);
+                transference.run(currencyRepositoryImpl);
                 break;
             case 3:
                 History history = new History();
-                history.run(userId, transactionRepository);
+                history.run(userId, transactionRepositoryImpl);
                 break;
             case 4:
                 CurrencyToday currency = new CurrencyToday();
-                currency.run(currencyRepository);
+                currency.run(currencyRepositoryImpl);
                 break;
             case 0:
                 System.out.println("Saliendo del programa...");

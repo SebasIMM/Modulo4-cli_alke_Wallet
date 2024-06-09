@@ -4,9 +4,9 @@ import org.example.cli.ConsoleController;
 import org.example.model.Account;
 import org.example.model.Currency;
 import org.example.model.Transaction;
-import org.example.repository.AccountRepository;
-import org.example.repository.CurrencyRepository;
-import org.example.repository.TransactionRepository;
+import org.example.repository.impl.AccountRepositoryImpl;
+import org.example.repository.impl.CurrencyRepositoryImpl;
+import org.example.repository.impl.TransactionRepositoryImpl;
 import org.example.util.CsvUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -16,17 +16,17 @@ public class Main {
     public static void main(String[] args) {
         // Accounts List
         @NotNull List<Account> accountsFromCsv = CsvUtil.readAccountsFromCsv();
-        AccountRepository accountRep = new AccountRepository();
+        AccountRepositoryImpl accountRep = new AccountRepositoryImpl();
         accountRep.createAccounts(accountsFromCsv);
 
         // Currencies List
         List<Currency> currenciesFromCsv = CsvUtil.readCurrenciesFromCsv();
-        CurrencyRepository currencyrep = new CurrencyRepository();
+        CurrencyRepositoryImpl currencyrep = new CurrencyRepositoryImpl();
         currencyrep.createCurrencies(currenciesFromCsv);
 
         // Transactions List
         List<Transaction> transactionsFromCsv = CsvUtil.readTransactionsFromCsv();
-        TransactionRepository transactionRep = new TransactionRepository();
+        TransactionRepositoryImpl transactionRep = new TransactionRepositoryImpl();
         transactionRep.createTransactions(transactionsFromCsv);
 
         // Start cli

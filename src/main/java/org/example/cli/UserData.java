@@ -1,11 +1,11 @@
 package org.example.cli;
 
 import org.example.model.Account;
-import org.example.repository.AccountRepository;
+import org.example.repository.impl.AccountRepositoryImpl;
 
 public class UserData {
-    public void run(int userId, AccountRepository accountRepository) {
-        Account userAccount = accountRepository.getAccountById(userId);
+    public void run(int userId, AccountRepositoryImpl accountRepositoryImpl) {
+        Account userAccount = accountRepositoryImpl.getAccountById(userId);
 
         try {
             if (userAccount != null) {
